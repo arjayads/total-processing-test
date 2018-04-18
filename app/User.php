@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Plustelecom\TotalProcessing\CanProcessPayment;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use CanProcessPayment;
 
     /**
      * The attributes that are mass assignable.
