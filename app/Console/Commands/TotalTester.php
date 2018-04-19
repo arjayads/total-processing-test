@@ -39,15 +39,16 @@ class TotalTester extends Command
     public function handle()
     {
         $this->user = User::find(1);
-        $this->testCreateRegistration();
+
+//        $this->testCharge();
+        $this->testChargeCreateRegistration();
 
         $this->info('Done... '.$this->user->email);
     }
 
-    private function testCreateRegistration() {
-
+    private function testChargeCreateRegistration() {
         $paymentData = [
-            'amount' => 98.20,
+            'amount' => '97.00',
             'paymentBrand' => 'VISA',
             'paymentType' => 'DB',
             'card.number' => '4200000000000000',
@@ -57,7 +58,23 @@ class TotalTester extends Command
             'card.cvv' => '123',
         ];
 
-        $response = $this->user->createRegistration($paymentData);
+        $response = $this->user->charge($paymentData, true);
+        dd($response);
+    }
+    private function testCharge() {
+
+        $paymentData = [
+            'amount' => '98.00',
+            'paymentBrand' => 'VISA',
+            'paymentType' => 'DB',
+            'card.number' => '4200000000000000',
+            'card.holder' => 'Jane Jones',
+            'card.expiryMonth' => '05',
+            'card.expiryYear' => '2018',
+            'card.cvv' => '123',
+        ];
+
+        $response = $this->user->charge($paymentData);
         dd($response);
     }
 

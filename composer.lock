@@ -1156,12 +1156,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:Plus-Telecom/TotalProcessing-cc.git",
-                "reference": "12b8c2e77f58539a2319b985ff82bc7d19fee95c"
+                "reference": "6455af2eb2cf28e0cef612ff366e7af6c13f10f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Plus-Telecom/TotalProcessing-cc/zipball/12b8c2e77f58539a2319b985ff82bc7d19fee95c",
-                "reference": "12b8c2e77f58539a2319b985ff82bc7d19fee95c",
+                "url": "https://api.github.com/repos/Plus-Telecom/TotalProcessing-cc/zipball/6455af2eb2cf28e0cef612ff366e7af6c13f10f3",
+                "reference": "6455af2eb2cf28e0cef612ff366e7af6c13f10f3",
                 "shasum": ""
             },
             "require": {
@@ -1198,7 +1198,7 @@
                 "source": "https://github.com/Plus-Telecom/TotalProcessing-cc/tree/master",
                 "issues": "https://github.com/Plus-Telecom/TotalProcessing-cc/issues"
             },
-            "time": "2018-04-18 14:18:05"
+            "time": "2018-04-19 09:00:51"
         },
         {
             "name": "psr/container",
