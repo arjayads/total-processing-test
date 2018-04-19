@@ -41,7 +41,8 @@ class TotalTester extends Command
         $this->user = User::find(1);
 
 //        $this->testCharge();
-        $this->testChargeCreateRegistration();
+//        $this->testChargeCreateRegistration();
+        $this->testCreateRegistration();
 
         $this->info('Done... '.$this->user->email);
     }
@@ -54,7 +55,7 @@ class TotalTester extends Command
             'card.number' => '4200000000000000',
             'card.holder' => 'Jane Jones',
             'card.expiryMonth' => '05',
-            'card.expiryYear' => '2018',
+            'card.expiryYear' => '2019',
             'card.cvv' => '123',
         ];
 
@@ -75,6 +76,21 @@ class TotalTester extends Command
         ];
 
         $response = $this->user->charge($paymentData);
+        dd($response);
+    }
+
+    private function testCreateRegistration() {
+
+        $paymentData = [
+            'paymentBrand' => 'VISA',
+            'card.number' => '4200000000000000',
+            'card.holder' => 'Jane Jones',
+            'card.expiryMonth' => '05',
+            'card.expiryYear' => '2018',
+            'card.cvv' => '123',
+        ];
+
+        $response = $this->user->register($paymentData);
         dd($response);
     }
 
