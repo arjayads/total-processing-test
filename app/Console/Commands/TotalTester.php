@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class TotalTester extends Command
@@ -42,7 +43,8 @@ class TotalTester extends Command
 
 //        $this->testCharge();
 //        $this->testChargeCreateRegistration();
-        $this->testCreateRegistration();
+//        $this->testCreateRegistration();
+        $this->testSubscribe();
 
         $this->info('Done... '.$this->user->email);
     }
@@ -79,6 +81,30 @@ class TotalTester extends Command
         dd($response);
     }
 
+    private function testSubscribe() {
+
+        $paymentData = [
+            'paymentBrand' => 'VISA',
+            'card.number' => '4200000000000000',
+            'card.holder' => 'Jane Jones',
+            'card.expiryMonth' => '05',
+            'card.expiryYear' => '2018',
+            'card.cvv' => '123',
+        ];
+
+        $response = $this->user->register($paymentData);
+
+        if($response && isset($response['id'])) {
+
+            $paymentData = [
+                'amount' => '17.00',
+            ];
+
+            $response = $this->user->subscribe(1, Carbon::now()->toDateTimeString(), $paymentData);
+            dd($response);
+        }
+    }
+
     private function testCreateRegistration() {
 
         $paymentData = [
@@ -92,35 +118,5 @@ class TotalTester extends Command
 
         $response = $this->user->register($paymentData);
         dd($response);
-    }
-
-    private function test() {
-        $url = "https://test.oppwa.com/v1/payments";
-        $data = "authentication.userId=8a829417567d952801568d9d9e9f0b88" .
-            "&authentication.password=jay27at5s2" .
-            "&authentication.entityId=8a829417567d952801568d9d9e3c0b84" .
-            "&amount=92.00" .
-            "&currency=GBP" .
-            "&paymentBrand=VISA" .
-            "&paymentType=DB" .
-            "&card.number=4200000000000000" .
-            "&card.holder=Jane Jones" .
-            "&card.expiryMonth=05" .
-            "&card.expiryYear=2018" .
-            "&card.cvv=123" .
-            "&createRegistration=true";
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $responseData = curl_exec($ch);
-        if(curl_errno($ch)) {
-            return curl_error($ch);
-        }
-        curl_close($ch);
-        return $responseData;
     }
 }
